@@ -15,7 +15,7 @@ PATTERN_SIZE = re.compile(r"size=(\d+)")
 class WebUrls:
     """Class for parsing urls from website"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize url from settings"""
         self.page = 0
         self.url = self.customize_url(settings.URL)
@@ -27,7 +27,7 @@ class WebUrls:
         :return: list of urls"""
         urls = []
         while True:
-            self.url = self.customize_url(self.url, self.page)
+            self.url = self.customize_url(self.url)
             soup = self.get_soup()
             row_urls = soup.find_all(
                 "div", class_="item ticket-title"
@@ -46,7 +46,6 @@ class WebUrls:
 
     def customize_url(self, url: str, size: int = 100) -> str:
         """Customize url for parsing
-        :param url: url for parsing
         :param size: size of page
 
         :return: customized url"""

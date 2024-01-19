@@ -10,7 +10,7 @@ from app.config import settings
 class Manager:
     """Class for managing database connection and data"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize database connection and create table if not exists"""
 
         self.connection = psycopg2.connect(
@@ -25,7 +25,7 @@ class Manager:
 
         self.create_table()
 
-    def create_table(self):
+    def create_table(self) -> None:
         """Create table if not exists"""
 
         cursor = self.connection.cursor()
@@ -49,7 +49,7 @@ class Manager:
 
         logger.info("Table created")
 
-    def insert_data(self, values: list[tuple]):
+    def insert_data(self, values: list[tuple]) -> None:
         """Insert data into table
         :param values: list of tuples with data
         """
@@ -65,7 +65,7 @@ class Manager:
 
         logger.info("Data inserted")
 
-    def dump_data(self):
+    def dump_data(self) -> None:
         """Dump data from table to sql file"""
 
         cursor = self.connection.cursor()
