@@ -31,7 +31,7 @@ class WebUrls:
             soup = self.get_soup()
             row_urls = soup.find_all(
                 "div", class_="item ticket-title"
-            )  # TODO add func fr that
+            )
 
             if len(row_urls) == 0:
                 logger.info(f"Found {len(urls)} urls")
