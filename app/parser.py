@@ -77,6 +77,17 @@ async def fetch_data(session: ClientSession, url: str) -> tuple:
     try:
         async with session.get(url) as response:
             html = await response.text()
+            
+            data_user_secure_hash = re.search(r'data-user-secure-hash="([^"]+)', html).group(1)
+
+            data_expires = re.search(r'data-expires="([^"]+)', html).group(1)
+            
+            data_auto_id = re.search(r'data-auto-id="([^"]+)', html).group(1)
+            
+            phone_number_row = requests.get(f"https://auto.ria.com/users/phones/{data_auto_id}?hash={data_user_secure_hash}&expires={data_expires}")
+
+            phone_number = int(phone_number_row.json()["formattedPhoneNumber"].replace("(", "").replace(")", "").replace(" ", ""))
+            
             soup = BeautifulSoup(html, "html.parser")
             price = int(
                 soup.find("div", class_="price_value")
@@ -106,6 +117,7 @@ async def fetch_data(session: ClientSession, url: str) -> tuple:
                 len(photos),
                 car_number,
                 car_vin,
+                phone_number
             )
     except Exception as e:
         logger.error(f"Error for {url}: {e}")

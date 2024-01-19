@@ -40,6 +40,7 @@ class Manager:
                 images_count INTEGER,
                 car_number VARCHAR(255),
                 car_vin VARCHAR(255),
+                phone_number INTEGER,
                 datetime_found TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """
@@ -57,7 +58,7 @@ class Manager:
         cursor = self.connection.cursor()
         execute_values(
             cursor,
-            "INSERT INTO car_data (url, title, price_usd, odometer, username, image_url, images_count, car_number, car_vin) VALUES %s",
+            "INSERT INTO car_data (url, title, price_usd, odometer, username, image_url, images_count, car_number, car_vin, phone_number) VALUES %s",
             values,
         )
         self.connection.commit()
