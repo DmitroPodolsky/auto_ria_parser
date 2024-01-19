@@ -101,6 +101,6 @@ class Manager:
 
             logger.success("Data dumped")
 
-            cursor.execute("DELETE FROM your_table_name")
+            cursor.execute("DELETE FROM car_data")
             self.connection.commit()
             logger.success("Data from table deleted")

@@ -17,6 +17,7 @@ class WebUrls:
 
     def __init__(self):
         """Initialize url from settings"""
+        self.page = 0
         self.url = self.customize_url(settings.URL)
 
         logger.info(f"WebUrls initialized with url: {self.url}")
@@ -25,9 +26,8 @@ class WebUrls:
         """Get urls from website
         :return: list of urls"""
         urls = []
-        page = 0
         while True:
-            self.url = self.customize_url(self.url, page)
+            self.url = self.customize_url(self.url, self.page)
             soup = self.get_soup()
             row_urls = soup.find_all(
                 "div", class_="item ticket-title"
@@ -42,9 +42,9 @@ class WebUrls:
                     urls.append(url.select_one("a")["href"])
                 except Exception as e:
                     logger.error(f"Error for {url}: {e}")
-            page += 1
+            self.page += 1
 
-    def customize_url(self, url: str, page: int = 0, size: int = 100) -> str:
+    def customize_url(self, url: str, size: int = 100) -> str:
         """Customize url for parsing
         :param url: url for parsing
         :param page: page number
@@ -52,9 +52,9 @@ class WebUrls:
 
         :return: customized url"""
         if PATTERN_PAGE.search(url):
-            url = re.sub(re.compile(r"page=(\d+)"), f"page={page}", url)
+            url = re.sub(re.compile(r"page=(\d+)"), f"page={self.page}", url)
         else:
-            url += f"&page={page}"
+            url += f"&page={self.page}"
 
         if PATTERN_SIZE.search(url):
             url = re.sub(PATTERN_SIZE, f"size={size}", url)
