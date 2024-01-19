@@ -100,3 +100,7 @@ class Manager:
             file.write("{}\n{};\n".format(insert_prefix, row_data))
 
             logger.success("Data dumped")
+
+            cursor.execute("DELETE FROM your_table_name")
+            self.connection.commit()
+            logger.success("Data from table deleted")
