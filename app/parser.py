@@ -47,7 +47,6 @@ class WebUrls:
     def customize_url(self, url: str, size: int = 100) -> str:
         """Customize url for parsing
         :param url: url for parsing
-        :param page: page number
         :param size: size of page
 
         :return: customized url"""
