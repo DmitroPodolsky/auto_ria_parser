@@ -25,7 +25,9 @@ Execute the following command:
 cd auto_ria_parser
 ```
 
-#### Step 3: configure .env from .env_example
+#### Step 3: configure .env from .env.example
+
+#### Step 4: add your bot to telegram channel/group and promote him to admin.
 
 ### Method 1: Using pip
 
