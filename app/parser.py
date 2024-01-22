@@ -52,7 +52,7 @@ class WebUrls:
         if PATTERN_PAGE.search(url):
             url = re.sub(re.compile(r"page=(\d+)"), f"page={self.page}", url)
         else:
-            url += f"&page={self.page}"
+            url += f"?page={self.page}"
 
         if PATTERN_SIZE.search(url):
             url = re.sub(PATTERN_SIZE, f"size={size}", url)

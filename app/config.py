@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     POSTGRESS_HOST: str
     POSTGRESS_PORT: int
     DATA: Path = project_dir / "data"
-    URL: str
+    URL: str = "https://auto.ria.com/car/used/"
 
     class Config:
         """Class for managing settings config"""
